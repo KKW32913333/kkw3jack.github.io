@@ -1,84 +1,42 @@
-// テーマ切り替え（ライト / ダーク）と永続化
+// テーマ切り替え
 (function () {
   const root = document.documentElement;
-  const themeBtn = document.getElementById("themeBtn");
+  const btn = document.getElementById("themeBtn");
 
-  const storedTheme = localStorage.getItem("theme");
-  if (storedTheme === "dark") {
+  const saved = localStorage.getItem("theme");
+  if (saved === "dark") {
     root.setAttribute("data-theme", "dark");
-    if (themeBtn) themeBtn.textContent = "☀️";
+    btn.textContent = "☀️";
   }
 
-  function toggleTheme() {
+  btn.addEventListener("click", () => {
     const isDark = root.getAttribute("data-theme") === "dark";
+
     if (isDark) {
       root.removeAttribute("data-theme");
       localStorage.setItem("theme", "light");
-      themeBtn.textContent = "🌙";
+      btn.textContent = "🌙";
     } else {
       root.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
-      themeBtn.textContent = "☀️";
+      btn.textContent = "☀️";
     }
-  }
-
-  if (themeBtn) {
-    themeBtn.addEventListener("click", toggleTheme);
-  }
+  });
 })();
 
-// スクロール時のセクションフェードイン
+// スクロールアニメーション
 (function () {
   const reveals = document.querySelectorAll(".reveal");
 
-  function onScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
+  function reveal() {
+    const trigger = window.innerHeight * 0.85;
 
     reveals.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        el.classList.add("visible");
-      }
+      const top = el.getBoundingClientRect().top;
+      if (top < trigger) el.classList.add("visible");
     });
   }
 
-  window.addEventListener("scroll", onScroll);
-  window.addEventListener("load", onScroll);
-})();
-
-// ナビゲーションのスムーススクロール & モバイルメニュー制御
-(function () {
-  const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-  const navList = document.querySelector(".nav-links");
-  const navToggle = document.querySelector(".nav-toggle");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const targetId = link.getAttribute("href").slice(1);
-      const target = document.getElementById(targetId);
-      if (!target) return;
-
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 72;
-
-      window.scrollTo({
-        top,
-        behavior: "smooth",
-      });
-
-      if (navList && navList.classList.contains("open")) {
-        navList.classList.remove("open");
-        if (navToggle) {
-          navToggle.setAttribute("aria-expanded", "false");
-        }
-      }
-    });
-  });
-
-  if (navToggle && navList) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navList.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-  }
+  window.addEventListener("scroll", reveal);
+  window.addEventListener("load", reveal);
 })();
