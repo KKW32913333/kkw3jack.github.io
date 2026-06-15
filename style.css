@@ -574,10 +574,10 @@ body {
   }
 
   .theme-toggle {
-    position: absolute;
-    right: 20px;
-    top: 14px;
-    z-index: 3000;
+  position: absolute;
+  right: 20px;   /* ← 画面の一番右端に配置 */
+  top: 14px;
+  z-index: 3000; /* ← メニューより前に出す */
   }
 
   .nav-links {
