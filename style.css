@@ -116,8 +116,12 @@ body {
   transition: width var(--transition);
 }
 
-.nav-links a:hover {
+/*.nav-links a:hover {
   color: var(--accent2);
+}*/
+
+.nav-links a {
+  color: #ffffff;   /* ← 好きな色に変更 */
 }
 
 .nav-links a:hover::after {
@@ -125,18 +129,16 @@ body {
 }
 
 /* テーマボタン */
-/*.theme-toggle {
+.theme-toggle {
   background: none;
   border: none;
   font-size: 22px;
   cursor: pointer;
   color: var(--text);
   transition: var(--transition);
-}*/
-.theme-toggle {
-  position: relative;
+    position: relative;
   z-index: 3000;
-  }
+}
 
 .theme-toggle:hover {
   transform: scale(1.15);
@@ -504,7 +506,8 @@ body {
 ================================ */
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
+    right: auto;
+    left: 20px; /* ← 左側に配置 */
   }
 
   .hero-title-glow {
@@ -563,8 +566,15 @@ body {
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
+    position: absolute;
+    left: 20px;   /* ← 左端に配置 */
+    top: 18px;
   }
 
+  /* ロゴは中央寄せにしたい場合 */
+  .logo.neon {
+    margin-left: 60px; /* ハンバーガーと重ならないように調整 */
+  }
   .nav-links {
     position: absolute;
     top: 70px;
