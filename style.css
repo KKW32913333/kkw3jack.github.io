@@ -319,12 +319,19 @@ body {
 }
 
 .skill-card {
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
 .skill-card:hover {
-  transform: rotateX(8deg) rotateY(-8deg) scale(1.03);
+  transform: translateY(-6px);
+  background: var(--accent);
+  color: white;
 }
 
 /* ================================
@@ -510,24 +517,9 @@ body {
     font-size: 2.4rem;
   }
 
-.btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
-  transition: 0.5s;
-}
-
-.btn:hover::after {
-  left: 120%;
+  .btn {
+    padding: 10px 22px;
+  }
 }
 
 /* ================================
