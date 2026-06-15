@@ -63,9 +63,8 @@ body {
 }
 
 .glass-header.scrolled {
-  padding: 4px 0;
-  background: rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
 .navbar {
@@ -166,15 +165,10 @@ body {
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
-  bottom: -150px;
-  right: -150px;
-  filter: blur(70px);
-  opacity: 0.6;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=");
+  mix-blend-mode: overlay;
 }
 
 .hero-content {
@@ -272,19 +266,27 @@ body {
    セクション共通
 ================================ */
 .section {
-  max-width: 1100px;
+  max-width: 960px;
   margin: auto;
   padding: 100px 20px;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 40px;
+.section-header h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
 }
 
-.section-header h2 {
-  font-size: 2rem;
-  font-weight: 600;
+.section-header h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 60%;
+  height: 3px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
 }
 
 .section-subtitle {
@@ -298,15 +300,31 @@ body {
 ================================ */
 .card {
   background: var(--card);
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
   backdrop-filter: var(--blur);
-  transition: var(--transition);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-6px);
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0));
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=");
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 /* ================================
@@ -319,19 +337,25 @@ body {
 }
 
 .skill-card {
-  background: var(--card);
-  padding: 20px;
-  border-radius: var(--radius);
-  text-align: center;
-  font-weight: 600;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
-.skill-card:hover {
-  transform: translateY(-6px);
-  background: var(--accent);
-  color: white;
+.skill-card::after {
+  content: "★";
+  position: absolute;
+  font-size: 4rem;
+  color: var(--accent2);
+  opacity: 0;
+  right: -20px;
+  bottom: -20px;
+  transition: 0.4s ease;
+}
+
+.skill-card:hover::after {
+  opacity: 0.15;
+  right: 0;
+  bottom: 0;
 }
 
 /* ================================
@@ -407,22 +431,35 @@ body {
    タイムライン
 ================================ */
 .timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(var(--accent), var(--accent2));
+  border-radius: 2px;
 }
 
 .timeline-item {
-  background: var(--card);
-  padding: 20px;
-  border-left: 5px solid var(--accent);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  position: relative;
 }
 
-.timeline-item:hover {
-  transform: translateX(6px);
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent2);
 }
 
 /* ================================
