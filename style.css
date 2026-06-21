@@ -561,52 +561,44 @@ body {
 ================================ */
 @media (max-width: 768px) {
 
-  .nav-toggle {
-    display: flex;
-  }
-
-  .logo.neon {
-    margin: auto;
-    text-align: center;
-  }
-
-  .theme-toggle {
-    position: absolute;
-    right: 20px;
-    top: 14px;
-    z-index: 3000;
-  }
-
-  /* ←← ここを大幅修正：透けないサイドメニューに変更 */
   .nav-links {
-    position: fixed;          /* ← 画面に固定 */
+    position: fixed;
     top: 0;
-    left: -260px;             /* ← 初期状態は画面外 */
+    left: -260px;
     width: 260px;
-    height: 100vh;            /* ← 全画面の高さ */
-    background: #111;         /* ← 完全不透明（透けない） */
+    height: 100vh;
+
+    /* ★ 明るくて見やすい背景に変更 */
+    background: #ffffff; /* 白 */
+    color: #1e1e2f;      /* 濃い文字色 */
+
     padding: 80px 20px;
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 18px;
-    transition: 0.3s ease;    /* ← スライドアニメ */
+    transition: 0.3s ease;
     z-index: 2000;
-    border-radius: 0;         /* ← カード風を解除 */
+    border-radius: 0;
     box-shadow: 2px 0 10px rgba(0,0,0,0.4);
   }
 
   .nav-links.open {
-    left: 0;                  /* ← 左からスライドイン */
+    left: 0;
   }
 
-  /* メニュー文字色（スマホ） */
+  /* ★ メニュー内リンクの文字色も見やすく */
   .nav-links a {
-    color: var(--accent);
+    color: #1e1e2f;       /* 黒に近い濃い文字色 */
     font-size: 1.1rem;
+    font-weight: 600;
   }
 
-  /* 背景オーバーレイ（新規追加） */
+  .nav-links a:hover {
+    color: var(--accent); /* ホバー時はアクセントカラー */
+  }
+
+  /* オーバーレイはそのまま */
   .overlay {
     position: fixed;
     top: 0;
@@ -626,13 +618,6 @@ body {
   }
 }
 
-/* PC メニュー色変更 */
-.nav-links a {
-  color: var(--text); /* ← 好きな色に変更可能 */
-}
-.nav-links a:hover {
-  color: var(--accent2);
-}
 
 /* ================================
    ロゴアニメーション（ネオン点滅 + 光の走り）
